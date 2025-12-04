@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerenciamento de Estacionamento</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#222222" />
+</head>
+<body>
+<header>
+  <h1>EstacioneAí – Painel</h1>
+</header>
+
+<main>
+  <!-- Tela de login / cadastro -->
+  <section id="login-section" class="auth-card">
+    <h2>Acesso ao sistema</h2>
+    <p class="auth-subtitle">Entre com seu usuário ou crie um novo acesso.</p>
+
+    <label for="loginNome">Nome (apenas para cadastro)</label>
+    <input id="loginNome" type="text" placeholder="Seu nome completo" />
+
+    <label for="loginEmail">E-mail</label>
+    <input id="loginEmail" type="email" placeholder="seuemail@exemplo.com" />
+
+    <label for="loginSenha">Senha</label>
+    <input id="loginSenha" type="password" placeholder="Mínimo 4 caracteres" />
+
+    <div class="auth-actions">
+      <button id="btnLogin">Entrar</button>
+      <button id="btnRegistrar">Cadastrar</button>
+    </div>
+  </section>
+
+  <!-- Aplicação principal (carregada somente após login) -->
+  <section id="app-section" class="hidden">
+    <section class="top-bar">
+      <div class="top-bar-left">
+        <input id="novoCodigo" type="text" placeholder="Código da vaga (ex: A01)" />
+        <button id="btnCriarVaga">Criar vaga</button>
+      </div>
+      <div class="user-info">
+        <span id="usuarioAtual"></span>
+        <button id="btnLogout" class="btn-logout">Sair</button>
+      </div>
+    </section>
+
+    <div id="vagas-container" class="grid"></div>
+  </section>
+</main>
+
+<!-- Modal -->
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <span id="fecharModal" class="close">&times;</span>
+    <h2 id="modalTitulo"></h2>
+    <div id="conteudoModal"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  // Registro básico do Service Worker para PWA
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch((err) => {
+        console.error('Erro ao registrar service worker:', err);
+      });
+    });
+  }
+</script>
+</body>
+</html>
