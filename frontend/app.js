@@ -30,7 +30,7 @@ function mostrarApp() {
   loginSection.classList.add("hidden");
   appSection.classList.remove("hidden");
   if (usuarioAtualSpan) {
-    usuarioAtualSpan.innerText = `Logado como: ${usuarioLogado.nome} (${usuarioLogado.email})`;
+    usuarioAtualSpan.innerText = `${usuarioLogado.nome}`;
   }
 }
 
@@ -151,7 +151,7 @@ async function carregarVagas() {
     vagas.forEach((v) => {
       const div = document.createElement("div");
       div.className = `vaga ${v.status}`;
-      div.innerText = v.codigo;
+      div.innerText = v.codigo; // O CSS adicionará o ícone via ::before
       div.onclick = () => abrirModal(v);
       vagasContainer.appendChild(div);
     });
@@ -163,17 +163,22 @@ async function carregarVagas() {
 
 function abrirModal(vaga) {
   modal.classList.remove("hidden");
-  modalTitulo.innerText = `Vaga ${vaga.codigo} – ${vaga.status}`;
+  modalTitulo.innerText = `Vaga ${vaga.codigo}`; // Título limpo
 
+  // HTML injetado ajustado com as novas classes de CSS
   if (vaga.status === "LIVRE") {
     conteudoModal.innerHTML = `
-      <label>Placa:</label>
-      <input id="placa" type="text"/>
+      <div class="input-group">
+        <label>Placa do Veículo</label>
+        <input id="placa" type="text" placeholder="ABC-1234"/>
+      </div>
 
-      <label>Cliente:</label>
-      <input id="cliente" type="text"/>
+      <div class="input-group">
+        <label>Nome do Cliente</label>
+        <input id="cliente" type="text" placeholder="Nome do condutor"/>
+      </div>
 
-      <button id="btnRegistrarEntrada">Registrar Entrada</button>
+      <button id="btnRegistrarEntrada" class="btn-primary" style="margin-top: 10px;">Registrar Entrada</button>
     `;
 
     const btn = document.getElementById("btnRegistrarEntrada");
@@ -182,9 +187,11 @@ function abrirModal(vaga) {
     }
   } else {
     conteudoModal.innerHTML = `
-      <p><strong>Placa:</strong> ${vaga.placa || "-"}</p>
-      <p><strong>Cliente:</strong> ${vaga.cliente || "-"}</p>
-      <button id="btnRegistrarSaida">Registrar Saída</button>
+      <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <p style="margin: 5px 0;"><strong>Placa:</strong> ${vaga.placa || "-"}</p>
+        <p style="margin: 5px 0;"><strong>Cliente:</strong> ${vaga.cliente || "-"}</p>
+      </div>
+      <button id="btnRegistrarSaida" class="btn-danger">Registrar Saída</button>
     `;
 
     const btn = document.getElementById("btnRegistrarSaida");
@@ -330,7 +337,7 @@ if (btnLogout) {
 // Inicializa a tela
 restaurarSessao();
 
-// Expõe funções no escopo global (caso necessário em algum momento)
+// Expõe funções no escopo global
 window.carregarVagas = carregarVagas;
 window.registrarEntrada = registrarEntrada;
 window.registrarSaida = registrarSaida;

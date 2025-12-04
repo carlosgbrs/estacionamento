@@ -3,66 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gerenciamento de Estacionamento</title>
+  <title>EstacioneAí</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#222222" />
+  <meta name="theme-color" content="#1e293b" />
 </head>
 <body>
+
 <header>
-  <h1>EstacioneAí – Painel</h1>
+  <div class="header-content">
+    <div class="logo">
+      <i class="fa-solid fa-square-parking"></i>
+      <h1>EstacioneAí</h1>
+    </div>
+  </div>
 </header>
 
 <main>
-  <!-- Tela de login / cadastro -->
-  <section id="login-section" class="auth-card">
-    <h2>Acesso ao sistema</h2>
-    <p class="auth-subtitle">Entre com seu usuário ou crie um novo acesso.</p>
+  <section id="login-section" class="auth-container">
+    <div class="auth-card">
+      <div class="auth-icon">
+        <i class="fa-solid fa-car-side"></i>
+      </div>
+      <h2>Bem-vindo</h2>
+      <p class="auth-subtitle">Acesse o sistema para gerenciar seu estacionamento.</p>
 
-    <label for="loginNome">Nome (apenas para cadastro)</label>
-    <input id="loginNome" type="text" placeholder="Seu nome completo" />
+      <div class="input-group">
+        <label for="loginNome"><i class="fa-solid fa-user"></i> Nome (apenas cadastro)</label>
+        <input id="loginNome" type="text" placeholder="Seu nome completo" />
+      </div>
 
-    <label for="loginEmail">E-mail</label>
-    <input id="loginEmail" type="email" placeholder="seuemail@exemplo.com" />
+      <div class="input-group">
+        <label for="loginEmail"><i class="fa-solid fa-envelope"></i> E-mail</label>
+        <input id="loginEmail" type="email" placeholder="seu@email.com" />
+      </div>
 
-    <label for="loginSenha">Senha</label>
-    <input id="loginSenha" type="password" placeholder="Mínimo 4 caracteres" />
+      <div class="input-group">
+        <label for="loginSenha"><i class="fa-solid fa-lock"></i> Senha</label>
+        <input id="loginSenha" type="password" placeholder="••••••••" />
+      </div>
 
-    <div class="auth-actions">
-      <button id="btnLogin">Entrar</button>
-      <button id="btnRegistrar">Cadastrar</button>
+      <div class="auth-actions">
+        <button id="btnLogin" class="btn-primary">Entrar</button>
+        <button id="btnRegistrar" class="btn-outline">Cadastrar</button>
+      </div>
     </div>
   </section>
 
-  <!-- Aplicação principal (carregada somente após login) -->
-  <section id="app-section" class="hidden">
-    <section class="top-bar">
-      <div class="top-bar-left">
-        <input id="novoCodigo" type="text" placeholder="Código da vaga (ex: A01)" />
-        <button id="btnCriarVaga">Criar vaga</button>
+  <section id="app-section" class="hidden fade-in">
+    <section class="control-panel">
+      <div class="panel-left">
+        <div class="search-box">
+          <i class="fa-solid fa-plus"></i>
+          <input id="novoCodigo" type="text" placeholder="Cód. Vaga (ex: A01)" />
+        </div>
+        <button id="btnCriarVaga" class="btn-primary">Adicionar Vaga</button>
       </div>
-      <div class="user-info">
-        <span id="usuarioAtual"></span>
-        <button id="btnLogout" class="btn-logout">Sair</button>
+      
+      <div class="panel-right">
+        <div class="user-badge">
+          <i class="fa-solid fa-circle-user"></i>
+          <span id="usuarioAtual">Usuário</span>
+        </div>
+        <button id="btnLogout" class="btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
       </div>
     </section>
+
+    <div class="dashboard-header">
+      <h3>Visão Geral do Pátio</h3>
+      <div class="legend">
+        <span class="badge livre">Livre</span>
+        <span class="badge ocupada">Ocupada</span>
+      </div>
+    </div>
 
     <div id="vagas-container" class="grid"></div>
   </section>
 </main>
 
-<!-- Modal -->
 <div id="modal" class="modal hidden">
   <div class="modal-content">
-    <span id="fecharModal" class="close">&times;</span>
-    <h2 id="modalTitulo"></h2>
-    <div id="conteudoModal"></div>
+    <span id="fecharModal" class="close-btn"><i class="fa-solid fa-xmark"></i></span>
+    <div class="modal-header">
+      <h2 id="modalTitulo">Detalhes da Vaga</h2>
+    </div>
+    <div id="conteudoModal" class="modal-body"></div>
   </div>
 </div>
 
 <script src="app.js"></script>
 <script>
-  // Registro básico do Service Worker para PWA
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('sw.js').catch((err) => {
