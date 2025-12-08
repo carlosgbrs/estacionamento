@@ -6,7 +6,7 @@ Repositório iniciado para entrega do MPV do software estacionamento, o mesmo de
 [Carlos Rech](https://github.com/carlosgbrs),
 [Heitor Baretta Fachin](https://github.com/HeitorFachin),
 
-# Relatorio
+# Relatório
 Para uma melhor contextualização alteramos o nome do projeto de EstacionaAI para Estacionamento 
 
 [Relatorio Prática Extensionista IV.pdf](https://github.com/user-attachments/files/24021792/Relatorio.Pratica.Extensionista.IV.pdf)
