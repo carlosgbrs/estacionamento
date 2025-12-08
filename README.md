@@ -14,7 +14,7 @@ A Modelagem de Entidade e Relacionamento (MER) é usada para representar a estru
 - Modelo Conceitual: Foca nos conceitos principais, como entidades (objetos) e relacionamentos, sem se preocupar com a implementação técnica.
   ## Entidades
   
-    ### Cliente
+    ### Usuário
   - Cadastra-se no sistema com nome, e-mail e senha.
   - Possui veículos (um usuário pode ter vários veículos).
   
