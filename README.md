@@ -7,6 +7,7 @@ Repositório iniciado para entrega do MPV do software EstacioneAI, o mesmo desen
 [Heitor Baretta Fachin](https://github.com/HeitorFachin),
 
 # Relatorio
+Para uma melhor contextualização alteramos o nome do projeto de EstacionaAI para Estacionamento 
 [Relatorio Prática Extensionista IV.pdf](https://github.com/user-attachments/files/24021792/Relatorio.Pratica.Extensionista.IV.pdf)
 
 ## Modelagem de Entidade e Relacionamento (Conceitual e Lógico)
